@@ -1,0 +1,17 @@
+{
+  "app": {
+    "attention": "Something",
+    "ok": "Ok"
+  },
+  "general": {
+    "rentals": "Rentals",
+    "properties": "Properties",
+    "settings": "Settings",
+    "rentalProperties": "Rental Properties"
+  },
+  "login": {
+    "enter": {
+      "message": "Test"
+    }
+  }
+}

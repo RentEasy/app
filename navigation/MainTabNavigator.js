@@ -1,41 +1,24 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import i18n from '../i18n';
 
 import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import PropertiesScreen from '../screens/PropertiesScreen';
+import PropertyScreen from '../screens/PropertyScreen';
 
-const HomeStack = createStackNavigator({
-  Home: HomeScreen,
+const PropertiesStack = createStackNavigator({
+  Properties: PropertiesScreen,
+  Property: PropertyScreen,
 });
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+PropertiesStack.navigationOptions = {
+  tabBarLabel: i18n.t('general.rentals'),
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
-};
-
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
-});
-
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+      name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
     />
   ),
 };
@@ -45,21 +28,7 @@ const SettingsStack = createStackNavigator({
 });
 
 SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
-    />
-  ),
-};
-
-const PropertiesStack = createStackNavigator({
-  Properties: PropertiesScreen,
-});
-
-PropertiesStack.navigationOptions = {
-  tabBarLabel: 'Properties',
+  tabBarLabel: i18n.t('general.settings'),
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -70,7 +39,5 @@ PropertiesStack.navigationOptions = {
 
 export default createBottomTabNavigator({
   PropertiesStack,
-  HomeStack,
-  LinksStack,
   SettingsStack,
 });

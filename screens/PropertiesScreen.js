@@ -1,33 +1,91 @@
 import React from 'react';
 import {
-  Image,
   Platform,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
+  FlatList
 } from 'react-native';
-import { WebBrowser } from 'expo';
+import i18n from '../i18n';
+import {connect} from 'react-redux';
+import {propertiesFetch} from "../actions/PropertiesActions";
+import {Property} from "../components/properties/Property";
 
-import { MonoText } from '../components/StyledText';
-import PropertiesList from '../components/properties/PropertyList';
 
-export default class PropertiesScreen extends React.Component {
+class PropertiesScreen extends React.Component {
   static navigationOptions = {
-    header: null,
+    title: i18n.t('general.rentalProperties'),
   };
 
-  render() {
+  componentWillMount() {
+    this.props.propertiesFetch();
+  }
+
+  componentWillUnmount() {
+    this.props.unsubscribe();
+  }
+
+  renderLoading() {
+    return (
+      <View>
+        <Text>Loading.</Text>
+      </View>
+    )
+  }
+
+  renderNoContent() {
+    return (
+      <View>
+        <Text>No properties found.</Text>
+      </View>
+    )
+  }
+
+  renderList() {
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          <PropertiesList/>
-        </ScrollView>
+        <FlatList
+          data={this.props.properties}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={this._renderItem}
+        />
       </View>
     );
   }
+
+  _renderItem = ({item}) => (
+    <Property
+      property={item}
+      onPress={() =>
+        this.props.navigation.push('Property', {
+          property: item
+        })
+      }
+    />
+  );
+
+  render() {
+    if (this.props.loading) {
+      return this.renderLoading();
+    }
+
+    if (this.props.properties.length === 0) {
+      return this.renderNoContent();
+    }
+
+    return this.renderList();
+  }
 }
+
+const mapStateToProps = state => {
+  const {loading, properties, unsubscribe} = state.properties;
+  return {loading, properties, unsubscribe};
+};
+
+export default connect(mapStateToProps, {
+  propertiesFetch
+})(PropertiesScreen);
 
 const styles = StyleSheet.create({
   container: {
@@ -85,7 +143,7 @@ const styles = StyleSheet.create({
     ...Platform.select({
       ios: {
         shadowColor: 'black',
-        shadowOffset: { height: -3 },
+        shadowOffset: {height: -3},
         shadowOpacity: 0.1,
         shadowRadius: 3,
       },

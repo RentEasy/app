@@ -1,7 +1,14 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import { AppLoading, Asset, Font, Icon } from 'expo';
+import {Platform, StatusBar, StyleSheet, View} from 'react-native';
+import {AppLoading, Asset, Font, Icon} from 'expo';
+import {createStore, applyMiddleware, compose} from 'redux';
+import ReduxThunk from 'redux-thunk';
+import {Provider} from 'react-redux';
+import reducers from './reducers';
+
 import AppNavigator from './navigation/AppNavigator';
+import NavigationService from "./services/NavigationService";
+import {FirebaseService} from "./services";
 
 export default class App extends React.Component {
   state = {
@@ -18,11 +25,19 @@ export default class App extends React.Component {
         />
       );
     } else {
+      const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+      const store = createStore(reducers, composeEnhancers(applyMiddleware(ReduxThunk)));
+      FirebaseService.init();
+
       return (
-        <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          <AppNavigator />
-        </View>
+        <Provider store={store}>
+          <View style={styles.container}>
+            {Platform.OS === 'ios' && <StatusBar barStyle="default"/>}
+            <AppNavigator ref={navigatorRef => {
+              NavigationService.setTopLevelNavigator(navigatorRef);
+            }}/>
+          </View>
+        </Provider>
       );
     }
   }
@@ -50,7 +65,7 @@ export default class App extends React.Component {
   };
 
   _handleFinishLoading = () => {
-    this.setState({ isLoadingComplete: true });
+    this.setState({isLoadingComplete: true});
   };
 }
 
