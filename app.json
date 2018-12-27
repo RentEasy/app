@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "rentburgh",
-    "slug": "rentburgh",
+    "name": "RentEasy",
+    "slug": "renteasy",
     "privacy": "public",
     "sdkVersion": "31.0.0",
     "platforms": [
@@ -10,11 +10,11 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/logo.png",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/logo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#b6d5e1"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

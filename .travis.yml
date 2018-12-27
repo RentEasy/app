@@ -3,3 +3,6 @@ node_js:
   - "node"
 
 script: yarn test-ci
+
+before_script: |
+  cp .env.example .env

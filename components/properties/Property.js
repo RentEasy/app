@@ -1,21 +1,23 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 
-export default class Property extends React.Component {
-  render() {
-    return (
+const Property = ({property, onPress}) => {
+  return (
+    <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
         <Image
-          style={{ height: 200, left: 0, right: 0 }}
+          style={{ width: '100%', height: 200 }}
           resizeMode="contain"
-          source={{uri: 'https://loremflickr.com/g/800/450/house'}}
+          source={property.image}
         />
-        <Text>Your Beautiful Home</Text>
-        <Text>1234 Fake Dr. Garland, Tx 75043</Text>
+        <Text>{property.address}</Text>
+        <Text>1234 Fake</Text>
       </View>
-    );
-  }
-}
+    </TouchableOpacity>
+  );
+};
+
+export {Property};
 
 
 const styles = StyleSheet.create({
