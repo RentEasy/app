@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {login} from '../actions';
 import {View, Button, Text} from 'react-native';
-import {FACEBOOK_APP_ID} from 'react-native-dotenv';
 
 
 class LoginScreen extends React.Component {
@@ -17,7 +16,6 @@ class LoginScreen extends React.Component {
 
   renderLogin() {
     return <View>
-      <Text>{FACEBOOK_APP_ID}</Text>
       <Button title={"Login with Facebook"} onPress={this.onPressButton.bind(this)} />
     </View>
   }
