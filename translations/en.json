@@ -10,6 +10,9 @@
     "rentalProperties": "Rental Properties"
   },
   "login": {
+    "facebook": "Login with Facebook",
+    "google": "Login with Google",
+    "email": "Login with Email",
     "enter": {
       "message": "Test"
     }

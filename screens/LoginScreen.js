@@ -1,22 +1,31 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {login} from '../actions';
-import {View, Button, Text} from 'react-native';
+import {View, Button, Text, Image, StyleSheet, ActivityIndicator} from 'react-native';
+import i18n from "../i18n";
 
 
 class LoginScreen extends React.Component {
+  static navigationOptions = {
+    header: null,
+  };
 
   onPressButton() {
     this.props.login();
   }
 
   renderLoading() {
-    return <View><Text>Loading</Text></View>
+    return <View><ActivityIndicator size="large" /></View>
   }
 
   renderLogin() {
-    return <View>
-      <Button title={"Login with Facebook"} onPress={this.onPressButton.bind(this)} />
+    return <View style={styles.container}>
+      <Image source={require('../assets/images/logo.png')}
+             style={{ width: '100%', height: 400 }}
+             resizeMode="contain" />
+      <Button title={i18n.t('login.facebook')} onPress={this.onPressButton.bind(this)} />
+      <Button title={i18n.t('login.google')} onPress={() => {}} />
+      <Button title={i18n.t('login.email')} onPress={() => {}} />
     </View>
   }
 
@@ -36,3 +45,11 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {login})(LoginScreen);
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#b6d5e1',
+    paddingTop: '60%'
+  },
+});
