@@ -5,36 +5,22 @@ import NavigationService from '../services/NavigationService';
 import {Alert} from 'react-native';
 
 
-export const login = () => {
+export const login = (provider) => {
   return (dispatch) => {
     dispatch({type: LOGIN});
 
-    try {
-      FirebaseService.signInFacebook()
-        .then(function ({
-                          type,
-                          token,
-                          expires,
-                          permissions,
-                          declinedPermissions,
-                        }) {
-          if (type === 'success') {
-            // Get the user's name using Facebook's Graph API
-            fetch(`https://graph.facebook.com/me?access_token=${token}`).then(function (response) {
-              loginSuccess(dispatch, {
-                token: token,
-                name: response.json().name
-              });
-            });
-          } else {
-            // type === 'cancel'
-            loginFail(dispatch, 'User cancelled auth handshake.');
-          }
-        })
-    } catch ({message}) {
-      console.error(message);
-      loginFail(dispatch, message);
-    }
+    FirebaseService.signIn(provider).then(
+      (user) => loginSuccess(dispatch, user),
+      (err) => loginFail(dispatch, err)
+    );
+  }
+};
+
+export const loginUser = (user) => {
+  return (dispatch) => {
+    dispatch({type: LOGIN});
+
+    loginSuccess(dispatch, user);
   }
 };
 

@@ -21,22 +21,83 @@ class FirebaseService {
       messagingSenderId: FIREBASE_MESSAGING_SENDER_ID
     };
 
-    firebase.initializeApp(firebaseConfig)
+    firebase.initializeApp(firebaseConfig);
   }
 
-  static async signInFacebook() {
-    return await Expo.Facebook.logInWithReadPermissionsAsync(FACEBOOK_APP_ID, {
-      permissions: [
-        'public_profile',
-        'email',
-        'user_birthday',
-        'user_location',
-      ],
+  static waitForLogin() {
+    return new Promise((resolve, reject) => {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user != null) {
+          return resolve(user);
+        }
+
+        return reject();
+      });
     });
   }
 
-  static async signIn() {
-    return
+  static signInFacebook() {
+    return new Promise((resolve, reject) => {
+      Expo.Facebook.logInWithReadPermissionsAsync(FACEBOOK_APP_ID, {
+        permissions: [
+          'public_profile',
+          'email',
+          'user_birthday',
+          'user_location',
+        ],
+      }).then(function ({
+                          type,
+                          token,
+                          expires,
+                          permissions,
+                          declinedPermissions,
+                        }) {
+        if (type === 'success') {
+          // Get the user's name using Facebook's Graph API
+          fetch(`https://graph.facebook.com/me?access_token=${token}`).then(function (response) {
+
+            const credential = firebase.auth.FacebookAuthProvider.credential(token);
+
+            // Sign in with credential from the Facebook user.
+            firebase.auth().signInWithCredential(credential).catch((error) => {
+              // Handle Errors here.
+            });
+
+            resolve({
+              token: token,
+              name: response.json().name
+            });
+          });
+        } else {
+          reject('User cancelled auth handshake.');
+        }
+      });
+    });
+  }
+
+  static signInGoogle() {
+
+  }
+
+  static signInEmail() {
+    return new Promise((resolve, reject) => {
+      let testEmail = "test@axxim.net";
+      let testPassword = "1teFsd7st";
+      firebase.auth().signInWithEmailAndPassword(testEmail, testPassword)
+        .then(user => resolve(user))
+        .catch(error => reject(error));
+    });
+  }
+
+  static signIn(provider) {
+    switch (provider) {
+      case 'facebook':
+        return this.signInFacebook();
+      case 'google':
+        return this.signInGoogle();
+      case 'email':
+        return this.signInEmail();
+    }
   }
 
   static async signOut() {
@@ -45,4 +106,4 @@ class FirebaseService {
 
 }
 
-export { FirebaseService };
+export {FirebaseService};

@@ -23,9 +23,6 @@ export {Property};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 15,
-    backgroundColor: '#fff',
-    borderColor: '#000',
-    borderWidth: 1
+    marginTop: 15
   },
 });

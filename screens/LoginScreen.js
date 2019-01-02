@@ -1,8 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {login} from '../actions';
-import {View, Button, Text, Image, StyleSheet, ActivityIndicator} from 'react-native';
+import {login, loginUser} from '../actions';
+import {View, Image, StyleSheet, ActivityIndicator} from 'react-native';
+import {Button, Text} from 'native-base';
 import i18n from "../i18n";
+import {FirebaseService} from "../services";
 
 
 class LoginScreen extends React.Component {
@@ -14,6 +16,20 @@ class LoginScreen extends React.Component {
     this.props.login();
   }
 
+  onPressFacebook() {
+    this.props.login('facebook');
+  }
+  onPressGoogle() {
+    this.props.login('google');
+  }
+  onPressEmail() {
+    this.props.login('email');
+  }
+
+  componentWillMount() {
+    FirebaseService.waitForLogin().then(user => this.props.loginUser(user));
+  }
+
   renderLoading() {
     return <View><ActivityIndicator size="large" /></View>
   }
@@ -21,11 +37,19 @@ class LoginScreen extends React.Component {
   renderLogin() {
     return <View style={styles.container}>
       <Image source={require('../assets/images/logo.png')}
-             style={{ width: '100%', height: 400 }}
+             style={{ flexGrow: 2, width: '100%', height: '100%' }}
              resizeMode="contain" />
-      <Button title={i18n.t('login.facebook')} onPress={this.onPressButton.bind(this)} />
-      <Button title={i18n.t('login.google')} onPress={() => {}} />
-      <Button title={i18n.t('login.email')} onPress={() => {}} />
+      <View style={{ flexGrow: 2 }}>
+        <Button onPress={this.onPressFacebook.bind(this)}>
+          <Text>{i18n.t('login.facebook')}</Text>
+        </Button>
+          <Button onPress={this.onPressGoogle.bind(this)}>
+            <Text>{i18n.t('login.google')}</Text>
+          </Button>
+          <Button onPress={this.onPressEmail.bind(this)}>
+            <Text>{i18n.t('login.email')}</Text>
+          </Button>
+      </View>
     </View>
   }
 
@@ -44,11 +68,12 @@ const mapStateToProps = state => {
   return {loading, errorMessage};
 };
 
-export default connect(mapStateToProps, {login})(LoginScreen);
+export default connect(mapStateToProps, {login, loginUser})(LoginScreen);
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'flex-end',
     backgroundColor: '#b6d5e1',
     paddingTop: '60%'
   },
