@@ -4,10 +4,10 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import i18n from '../i18n';
 
 import TabBarIcon from '../components/TabBarIcon';
-import SettingsScreen from '../screens/SettingsScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 import PropertiesScreen from '../screens/PropertiesScreen';
 import PropertyScreen from '../screens/PropertyScreen';
-
+ 
 const PropertiesStack = createStackNavigator({
   Properties: PropertiesScreen,
   Property: PropertyScreen,
@@ -23,12 +23,12 @@ PropertiesStack.navigationOptions = {
   ),
 };
 
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
+const ProfileStack = createStackNavigator({
+  Profile: ProfileScreen,
 });
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: i18n.t('general.settings'),
+ProfileStack.navigationOptions = {
+  tabBarLabel: i18n.t('general.profile'),
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -39,5 +39,5 @@ SettingsStack.navigationOptions = {
 
 export default createBottomTabNavigator({
   PropertiesStack,
-  SettingsStack,
+  ProfileStack,
 });

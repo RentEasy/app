@@ -1,14 +1,35 @@
 import React from 'react';
 import { ExpoConfigView } from '@expo/samples';
+import {View} from 'react-native';
+import {Button, Text} from 'native-base';
+import i18n from "../i18n";
+import {connect} from 'react-redux';
+import {logout} from "../actions";
 
-export default class SettingsScreen extends React.Component {
+class SettingsScreen extends React.Component {
   static navigationOptions = {
     title: 'app.json',
   };
 
+  onPressLogout() {
+    this.props.logout();
+  }
+
   render() {
     /* Go ahead and delete ExpoConfigView and replace it with your
      * content, we just wanted to give you a quick view of your config */
-    return <ExpoConfigView />;
+    return <View>
+      <Button block light onPress={this.onPressLogout.bind(this)}>
+        <Text>{i18n.t('logout')}</Text>
+      </Button>
+      <ExpoConfigView />
+    </View>;
   }
 }
+
+const mapStateToProps = state => {
+  const {loading, errorMessage} = state.login;
+  return {loading, errorMessage};
+};
+
+export default connect(mapStateToProps, {logout})(SettingsScreen);

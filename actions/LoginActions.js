@@ -1,4 +1,4 @@
-import {LOGIN, LOGIN_FAIL, LOGIN_SUCCESS} from "./types";
+import {LOGIN, LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, LOGOUT_FAIL, LOGOUT_SUCCESS} from "./types";
 import i18n from '../i18n';
 import {FirebaseService} from "../services";
 import NavigationService from '../services/NavigationService';
@@ -32,6 +32,36 @@ const loginSuccess = (dispatch, user) => {
 
 const loginFail = (dispatch, error) => {
   dispatch({type: LOGIN_FAIL});
+
+  if (error) {
+    Alert.alert(
+      i18n.t('app.attention'),
+      error,
+      [{text: i18n.t('app.ok')}],
+      {cancelable: true}
+    );
+  }
+};
+
+export const logout = (provider) => {
+  return (dispatch) => {
+    dispatch({type: LOGOUT});
+
+    FirebaseService.signOut(provider).then(
+      () => logoutSuccess(dispatch),
+      (err) => logoutFail(dispatch, err)
+    );
+  }
+};
+
+const logoutSuccess = (dispatch) => {
+  dispatch({type: LOGOUT_SUCCESS});
+
+  NavigationService.navigate('Login');
+};
+
+const logoutFail = (dispatch, error) => {
+  dispatch({type: LOGOUT_FAIL});
 
   if (error) {
     Alert.alert(

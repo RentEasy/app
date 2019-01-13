@@ -1,6 +1,6 @@
 import React from 'react';
 import {Platform, StatusBar, StyleSheet, View} from 'react-native';
-import {Container} from 'native-base';
+import {Container, Content} from 'native-base';
 import {AppLoading, Asset, Font, Icon} from 'expo';
 import {createStore, applyMiddleware, compose} from 'redux';
 import ReduxThunk from 'redux-thunk';
@@ -33,13 +33,11 @@ export default class App extends React.Component {
 
       return (
         <Provider store={store}>
-          <Container>
-            <View style={styles.container}>
-              {Platform.OS === 'ios' && <StatusBar barStyle="default"/>}
-              <AppNavigator ref={navigatorRef => {
-                NavigationService.setTopLevelNavigator(navigatorRef);
-              }}/>
-            </View>
+          <Container style={styles.container}>
+            {Platform.OS === 'ios' && <StatusBar barStyle="default"/>}
+            <AppNavigator ref={navigatorRef => {
+              NavigationService.setTopLevelNavigator(navigatorRef);
+            }}/>
           </Container>
         </Provider>
       );

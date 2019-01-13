@@ -7,14 +7,25 @@
     "rentals": "Rentals",
     "properties": "Properties",
     "settings": "Settings",
-    "rentalProperties": "Rental Properties"
+    "profile": "Profile",
+    "rentalProperties": "Rental Properties",
+    "account": "Account",
+    "landlord": "Landlord",
+    "tenant": "Tenant"
   },
   "login": {
-    "facebook": "Login with Facebook",
-    "google": "Login with Google",
+    "facebook": "Continue with Facebook",
+    "google": "Continue with Google",
     "email": "Login with Email",
-    "enter": {
+    "logout": "Logout",
+    "enter": { 
       "message": "Test"
     }
+  },
+  "landlord": {
+    "listProperty": "Add Your Property"
+  },
+  "tenant": {
+    "renterProfile": "Renter Profile"
   }
 }

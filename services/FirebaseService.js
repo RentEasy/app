@@ -100,8 +100,8 @@ class FirebaseService {
     }
   }
 
-  static async signOut() {
-    return await firebase.auth().signOut();
+  static signOut() {
+    return firebase.auth().signOut();
   }
 
 }

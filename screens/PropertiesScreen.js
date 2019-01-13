@@ -9,7 +9,8 @@ import {
   Card,
   CardItem,
   Body,
-  Text
+  Text,
+  Content
 } from 'native-base';
 import i18n from '../i18n';
 import {connect} from 'react-redux';
@@ -65,8 +66,8 @@ class PropertiesScreen extends React.Component {
             </CardItem>
             <CardItem>
               <Body>
-              <Text>{property.address}</Text>
-              <Text note>$1345.56</Text>
+                <Text>{property.address}</Text>
+                <Text note>$1345.56</Text>
               </Body>
             </CardItem>
           </Card>
@@ -75,9 +76,9 @@ class PropertiesScreen extends React.Component {
     });
 
     return (
-      <ScrollView>
+      <Content>
         {properties}
-      </ScrollView>
+      </Content>
     )
   }
 
