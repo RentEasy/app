@@ -5,16 +5,31 @@ import i18n from '../i18n';
 
 import TabBarIcon from '../components/TabBarIcon';
 import ProfileScreen from '../screens/ProfileScreen';
-import PropertiesScreen from '../screens/PropertiesScreen';
-import PropertyScreen from '../screens/PropertyScreen';
+import PropertiesScreen from '../screens/landlord/PropertiesScreen';
+import PropertyScreen from '../screens/landlord/PropertyScreen';
  
-const PropertiesStack = createStackNavigator({
+// const PropertiesStack = createStackNavigator({
+//   Properties: PropertiesScreen,
+//   Property: PropertyScreen,
+// });
+
+// PropertiesStack.navigationOptions = {
+//   tabBarLabel: i18n.t('general.rentals'),
+//   tabBarIcon: ({ focused }) => (
+//     <TabBarIcon
+//       focused={focused}
+//       name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
+//     />
+//   ),
+// };
+
+const LandlordStack = createStackNavigator({
   Properties: PropertiesScreen,
   Property: PropertyScreen,
 });
 
-PropertiesStack.navigationOptions = {
-  tabBarLabel: i18n.t('general.rentals'),
+LandlordStack.navigationOptions = {
+  tabBarLabel: i18n.t('landlord.yourProperties'),
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -22,6 +37,7 @@ PropertiesStack.navigationOptions = {
     />
   ),
 };
+
 
 const ProfileStack = createStackNavigator({
   Profile: ProfileScreen,
@@ -38,6 +54,6 @@ ProfileStack.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
-  PropertiesStack,
+  LandlordStack,
   ProfileStack,
 });

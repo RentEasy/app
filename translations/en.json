@@ -23,6 +23,7 @@
     }
   },
   "landlord": {
+    "yourProperties": "Your Properties",
     "listProperty": "Add Your Property"
   },
   "tenant": {

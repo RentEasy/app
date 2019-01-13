@@ -12,7 +12,7 @@ import {
   Text,
   Content
 } from 'native-base';
-import i18n from '../i18n';
+import i18n from '../../i18n';
 import {connect} from 'react-redux';
 import {propertiesFetch} from "../actions/PropertiesActions";
 import {Property} from "../components/properties/Property";
