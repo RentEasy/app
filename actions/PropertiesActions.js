@@ -16,8 +16,8 @@ export const propertiesFetch = () => {
       },
       {
         id: "2",
-        address: "405 S Bock St. Broken Bow, OK 74728",
-        shortAddress: "405 S Bock St",
+        address: "3478 Beechwood Blvd Pittsburgh, PA 15217",
+        shortAddress: "3478 Beechwood Blvd",
         image: require("../assets/images/properties/jesse-roberts-146556-unsplash.jpg")
       },
       {

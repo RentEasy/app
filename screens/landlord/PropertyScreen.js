@@ -32,7 +32,7 @@ export default class PropertyScreen extends React.Component {
           <CardItem>
             <Grid>
               <Col size={9}>
-              <Text numberOfLines={1}>Luke &amp; Sam Strickland</Text>
+              <Text numberOfLines={1}>Luke Strickland</Text>
                 <Text note numberOfLines={1}>Started: September 2013</Text>
                 <Text note numberOfLines={1}>Ends: September 2014</Text>
               </Col>
