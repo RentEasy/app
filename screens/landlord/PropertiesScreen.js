@@ -20,7 +20,7 @@ class PropertiesScreen extends React.Component {
             </Left>
             <Body>
                 <Text>{property.shortAddress}</Text>
-                <Text note numberOfLines={1}>Its time to build a difference . .</Text>
+                <Text note numberOfLines={1}>Tenant: {property.tenant.name}</Text>
             </Body>
             <Right>
                 <Button transparent onPress={() =>
