@@ -14,7 +14,7 @@ class PropertiesScreen extends React.Component {
     }
 
     renderProperty(property) {
-        return  <ListItem thumbnail>
+        return  <ListItem thumbnail key={property.id}>
             <Left>
                 <Thumbnail square source={property.image} />
             </Left>

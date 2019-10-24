@@ -25,6 +25,7 @@
     "react": "16.8.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
     "react-native-dotenv": "^0.2.0",
+    "react-native-easy-grid": "^0.2.2",
     "react-native-svg": "^9.13.2",
     "react-native-svg-charts": "^5.3.0",
     "react-navigation": "^2.18.2",

@@ -18,9 +18,7 @@ class ProfileScreen extends React.Component {
   }
 
   render() {
-    /* Go ahead and delete ExpoConfigView and replace it with your
-     * content, we just wanted to give you a quick view of your config */
-    return <Content padder>
+    return <Content>
         <Separator bordered>
             <Text>{i18n.t('general.account')}</Text>
         </Separator>

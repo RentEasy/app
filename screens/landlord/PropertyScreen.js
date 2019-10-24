@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import { Content, Text, Icon, Thumbnail, Body, Right, Card, CardItem, Grid, Col } from 'native-base';
 import ProfitChart from "../../components/properties/ProfitChart";
+import FactTable from "../../components/properties/FactTable";
 
 export default class PropertyScreen extends React.Component {
   render() {
@@ -62,6 +63,14 @@ export default class PropertyScreen extends React.Component {
             <Body>
               <ProfitChart />
             </Body>
+          </CardItem>
+        </Card>
+        <Card>
+          <CardItem header>
+            <Text>Fact Sheet</Text>
+          </CardItem>
+          <CardItem>
+            <FactTable/>
           </CardItem>
         </Card>
       </Content>
