@@ -36,7 +36,11 @@ class PropertiesScreen extends React.Component {
 
     render() {
         return <Content>
-            <List dataArray={this.props.properties} renderRow={this.renderProperty.bind(this)}></List>
+            <List 
+                dataArray={this.props.properties} 
+                renderRow={this.renderProperty.bind(this)}
+                keyExtractor={(item) => item.id}   
+            />
         </Content>;
     }
 }

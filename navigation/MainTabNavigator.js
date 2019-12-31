@@ -7,6 +7,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import ProfileScreen from '../screens/ProfileScreen';
 import PropertiesScreen from '../screens/landlord/PropertiesScreen';
 import PropertyScreen from '../screens/landlord/PropertyScreen';
+import AddressScreen from '../screens/landlord/create/AddressScreen';
  
 // const PropertiesStack = createStackNavigator({
 //   Properties: PropertiesScreen,
@@ -23,9 +24,15 @@ import PropertyScreen from '../screens/landlord/PropertyScreen';
 //   ),
 // };
 
+
+const CreatePropertyStack = createStackNavigator({
+  AddressScreen: AddressScreen,
+});
+
 const LandlordStack = createStackNavigator({
   Properties: PropertiesScreen,
   Property: PropertyScreen,
+  CreateProperty: CreatePropertyStack
 });
 
 LandlordStack.navigationOptions = {
@@ -37,6 +44,7 @@ LandlordStack.navigationOptions = {
     />
   ),
 };
+
 
 
 const ProfileStack = createStackNavigator({

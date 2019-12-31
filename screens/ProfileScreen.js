@@ -14,7 +14,7 @@ class ProfileScreen extends React.Component {
   }
 
   onPressListProperty() {
-    
+    this.props.navigation.push('CreateProperty');
   }
 
   render() {
@@ -37,7 +37,7 @@ class ProfileScreen extends React.Component {
             <Text>{i18n.t('general.landlord')}</Text>
         </Separator>
         <ListItem button onPress={this.onPressListProperty.bind(this)}>
-            <Text>{i18n.t('landlord.listProperty')}</Text>
+            <Text>{i18n.t('landlord.createProperty')}</Text>
         </ListItem>
     </Content>;
   }

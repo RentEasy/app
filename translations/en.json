@@ -24,7 +24,7 @@
   },
   "landlord": {
     "yourProperties": "Your Properties",
-    "listProperty": "Add Your Property"
+    "createProperty": "Add Your Property"
   },
   "tenant": {
     "renterProfile": "Renter Profile"
